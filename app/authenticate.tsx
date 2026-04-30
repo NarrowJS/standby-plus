@@ -29,7 +29,7 @@ export default function AuthenticatePage() {
       try {
         console.log("Code found in URL, initiating manual swap...");
     
-        const response = await axios.post("http://192.168.1.90:3000/swap", {
+        const response = await axios.post("https://standby-plus.vercel.app/swap", {
           code: code
         });
 
