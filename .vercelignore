@@ -1,0 +1,10 @@
+# Ignore mobile-specific folders
+android/
+ios/
+assets/             # Only if your API doesn't need them
+.expo/
+
+# Ignore local dev files
+node_modules/       # Vercel will install these itself
+.env
+.DS_Store
