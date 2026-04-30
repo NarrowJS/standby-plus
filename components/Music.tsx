@@ -18,8 +18,8 @@ const Music = () => {
   async function handleAuthenticatePress() {
     try {
       const session = await authenticateAsync({
-        tokenSwapURL: "http://192.168.1.90:3000/swap",
-        tokenRefreshURL: "http://192.168.1.90:3000/refresh",
+        tokenSwapURL: "https://standby-plus.vercel.app/swap",
+        tokenRefreshURL: "https://standby-plus.vercel.app/refresh",
         scopes: [
           "ugc-image-upload",
           "user-read-playback-state",
@@ -53,7 +53,7 @@ const Music = () => {
     const refreshToken = await AsyncStorage.getItem("refreshToken");
     console.log("refreshing token...")
     try {
-      const response = await axios.post("http://192.168.1.90:3000/refresh", {
+      const response = await axios.post("https://standby-plus.vercel.app/refresh", {
           grant_type: 'refresh_token',
           refresh_token: refreshToken
       });
