@@ -1,0 +1,80 @@
+{
+  "expo": {
+    "name": "standby-plus",
+    "slug": "standby-plus",
+    "version": "1.0.0",
+    "orientation": "landscape",
+    "icon": "./assets/images/icon.png",
+    "scheme": "standbyplus",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#000000",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.narrowjs.standbyplus"
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#000000",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
+        }
+      ],
+      [
+        "@42techpacks/expo-spotify-sdk",
+        {
+          "clientID": "4f3170fa5385435f87a840cf0564b0f2",
+          "scheme": "standbyplus",
+          "host": "authenticate"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ],
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "The app needs to access your calendar."
+        }
+      ],
+      "@react-native-google-signin/google-signin",
+      "expo-secure-store"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "8ef6e9e6-ef0f-4736-b526-5a562c2bfc58"
+      }
+    }
+  }
+}
