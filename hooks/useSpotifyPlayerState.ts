@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function useSpotifyPlayerState() {
     const [playerState, setPlayerState] = useState<PlayerState | null>(null);
-    const [authToken, setAuthToken] = useState("unknown");
+    const [authToken, setAuthToken] = useState(null);
     const [mediaInfo, setMediaInfo] = useState(null)
 
     const nextTrack = async() => {
@@ -61,12 +61,14 @@ export function useSpotifyPlayerState() {
   }
 
   const fetchToken = async() => {
+    console.log("fetching spotify token...")
     try {
       const value = await AsyncStorage.getItem('token');
       if (value != null) {
         console.log("got token: "+value);
         setAuthToken(value);
       }
+      console.log("spotify token: "+value)
     } catch (error) {
       console.error("error fetching token: ",error);
     }

@@ -15,39 +15,7 @@ const Music = () => {
   const {authenticateAsync } = useSpotifyAuthentication();
 
 
-  async function handleAuthenticatePress() {
-    try {
-      const session = await authenticateAsync({
-        tokenSwapURL: "https://standby-plus.vercel.app/swap",
-        tokenRefreshURL: "https://standby-plus.vercel.app/refresh",
-        scopes: [
-          "ugc-image-upload",
-          "user-read-playback-state",
-          "user-modify-playback-state",
-          "user-read-currently-playing",
-          "app-remote-control",
-          "streaming",
-          "playlist-read-private",
-          "playlist-read-collaborative",
-          "playlist-modify-private",
-          "playlist-modify-public",
-          "user-follow-modify",
-          "user-follow-read",
-          "user-top-read",
-          "user-read-recently-played",
-          "user-library-modify",
-          "user-library-read",
-          "user-read-email",
-          "user-read-private",
-        ]
-      });
-
-
-
-    } catch (error) {
-      console.error('Authentication failed:', error)
-    }
-  }
+ 
 
   const refreshToken = async() => {
     const refreshToken = await AsyncStorage.getItem("refreshToken");

@@ -9,58 +9,54 @@ import axios from 'axios';
 import { Linking } from 'react-native';
 import GoogleAuthBtn from '@/components/GoogleAuthBtn';
 
+
 const config = () => {
   const {type} = useLocalSearchParams();
-  const {authenticateAsync } = useSpotifyAuthentication();
-
   const [spotifyConnected, setSpotifyConnected] = useState(false);
   const [city, setCity] = useState("");
+  const {authenticateAsync} = useSpotifyAuthentication()
 
-  const CLIENT_ID = "598591182474-8175etleta8u68nkrgb8ethr5r1g0thu.apps.googleusercontent.com";
-  const SCOPE = 'https://accounts.google.com';
-  const REDIRECT_URL = "standbyplus://index";
-  
-  
     async function handleAuthenticatePress() {
-      try {
-        const session = await authenticateAsync({
-          tokenSwapURL: "http://192.168.1.90:3000/swap",
-          tokenRefreshURL: "http://192.168.1.90:3000/refresh",
-          scopes: [
-            "ugc-image-upload",
-            "user-read-playback-state",
-            "user-modify-playback-state",
-            "user-read-currently-playing",
-            "app-remote-control",
-            "streaming",
-            "playlist-read-private",
-            "playlist-read-collaborative",
-            "playlist-modify-private",
-            "playlist-modify-public",
-            "user-follow-modify",
-            "user-follow-read",
-            "user-top-read",
-            "user-read-recently-played",
-            "user-library-modify",
-            "user-library-read",
-            "user-read-email",
-            "user-read-private",
-          ]
-        });
-      
-        
+    try {
+      const session = await authenticateAsync({
+        tokenSwapURL: "https://standby-plus.vercel.app/swap",
+        tokenRefreshURL: "https://standby-plus.vercel.app/refresh",
+        scopes: [
+          "ugc-image-upload",
+          "user-read-playback-state",
+          "user-modify-playback-state",
+          "user-read-currently-playing",
+          "app-remote-control",
+          "streaming",
+          "playlist-read-private",
+          "playlist-read-collaborative",
+          "playlist-modify-private",
+          "playlist-modify-public",
+          "user-follow-modify",
+          "user-follow-read",
+          "user-top-read",
+          "user-read-recently-played",
+          "user-library-modify",
+          "user-library-read",
+          "user-read-email",
+          "user-read-private",
+        ]
+      });
+
+
+
+    } catch (error) {
+      console.error('Authentication failed:', error)
+    }
+  }
   
-  
-      } catch (error) {
-        console.error('Authentication failed:', error)
-      }}
 
 
       const fetchSpotifyToken = async() => {
         console.log("fetching...")
         try {
           const token = await AsyncStorage.getItem('token');
-          if (token != "") {
+          if (token) {
             setSpotifyConnected(true);
             console.log("true")
           } else {
@@ -103,20 +99,7 @@ const config = () => {
       }, [])
 
 
-      const handleCalenderSignIn = async() => {
-
-        try {
-          const url = `https://accounts.google.com?client_id=${CLIENT_ID}?redirect_uri=${REDIRECT_URL}?response_type=token?scope=${SCOPE}?include_granted_scopes=true?state=pass-through-value`;
-
-          await Linking.openURL(url);
-        } catch (error) {
-          console.error("error getting calender sign in")
-        }
-        
-
-
-      }
-
+      
 
     
 
@@ -138,7 +121,7 @@ const config = () => {
 
           <View >
           {spotifyConnected ? <Text className='text-green-300'>Connected</Text> : <View className='flex-row'><Text className='text-red-300 ml-2 '>Not connected</Text></View>}
-          {spotifyConnected ? <></> : <TouchableOpacity className='bg-blue-500 p-3 rounded-lg w-24'><Text className='text-white font-semibold text-center'>Connect</Text></TouchableOpacity>}
+          {spotifyConnected ? <></> : <TouchableOpacity className='bg-blue-500 p-3 rounded-lg w-24' onPress={(async() => {handleAuthenticatePress()})}><Text className='text-white font-semibold text-center'>Connect</Text></TouchableOpacity>}
           
           </View>
         </View>
